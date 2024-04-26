@@ -21,15 +21,14 @@ function MovieListPage() {
     async function fetchMovies() {
       let loadedMovies = [];
       let currentId = (currentPage - 1) * totalMoviesPerPage + 1; // Calcular el ID inicial basado en la página actual
-      currentId = ((currentId + 1) % 3) + 1;
+      currentId = ((currentId + 1) % 3) +1;
       while (loadedMovies.length < totalMoviesPerPage) {
-        // const response = await fetch(`http://127.0.0.1:8000/api/peliculas/${currentId}/`);
         const response = await fetch(`http://127.0.0.1:8000/api/peliculas/${currentId}/`);
         if (!response.ok) continue;
         const data = await response.json();
         console.log(data);
         loadedMovies.push(data);
-        currentId = ((currentId + 1) % 3) + 1; // Simular que solo hay 3 películas en la API
+        currentId = ((currentId + 1) % 3) +1; // Simular que solo hay 3 películas en la API
       }
       setMovies(loadedMovies);
     }
@@ -57,7 +56,7 @@ function MovieListPage() {
 }, [currentPage, totalMoviesPerPage]);
 */
 
-  function handlePageChange(newPage) {
+function handlePageChange(newPage) {
     setCurrentPage(newPage);
   }
 
@@ -66,7 +65,9 @@ function MovieListPage() {
       {movies.map((movie, index) => (
         <Movie key={index} movie={movie} />
       ))}
-      <PageFilter currentPage={currentPage} onPageChange={handlePageChange} />
+      <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+        <PageFilter currentPage={currentPage} onPageChange={handlePageChange} />
+      </div>
     </div>
   );
 }
