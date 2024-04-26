@@ -1,20 +1,11 @@
 import React from 'react';
+import { useAuth } from './AuthContext.jsx';
 
 function Logout() {
+    const { logout } = useAuth(); // Utilizamos la función de logout del contexto
+
     const handleLogout = async () => {
-        try {
-            const response = await fetch('http://127.0.0.1:8000/api/users/logout/', {
-                method: 'DELETE',
-                credentials: 'include', // Incluye las cookies en la solicitud
-            });
-            if (response.ok) {
-                // Lógica para limpiar el estado de autenticación o redirigir a otra página
-            } else {
-                console.error('Error logging out');
-            }
-        } catch (error) {
-            console.error('Error logging out:', error);
-        }
+        await logout(); // Esto actualizará el estado y limpiará la sesión
     };
 
     return <button onClick={handleLogout}>Logout</button>;

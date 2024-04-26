@@ -10,16 +10,16 @@ export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
 
-    const login = (user) => {
+    const login = (name) => {
         setIsLoggedIn(true);
-        setUsername(user);
+        setUsername(name);
     };
 
     const logout = async () => {
         try {
             const response = await fetch('http://127.0.0.1:8000/api/users/logout/', {
                 method: 'DELETE',
-                credentials: 'include',
+                credentials: 'include', // Para asegurar que se envíen las cookies
             });
             if (response.ok) {
                 setIsLoggedIn(false);

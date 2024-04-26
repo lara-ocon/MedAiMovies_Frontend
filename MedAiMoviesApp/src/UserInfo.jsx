@@ -12,7 +12,8 @@ function UserInfo() {
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    setUsername(data.username);
+                    console.log(data);
+                    setUsername(data.nombre);
                 } else {
                     setUsername(null);
                 }

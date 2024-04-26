@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useAuth } from './AuthContext.jsx';
 
-
 export default function Login() {
     const { login } = useAuth();
     const [email, setEmail] = useState('');
@@ -14,19 +13,15 @@ export default function Login() {
         const response = await fetch('http://127.0.0.1:8000/api/users/login/', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            credentials: 'include', // Incluye las cookies en la solicitud
+            credentials: 'include', // Importante para las cookies de sesión
             body: JSON.stringify({email, password})
         });
 
         if (response.ok) {
-            const data = await response.json();
-            console.log(data)
-            console.log(data.token)
-            document.cookie = `session=${data.token}; path=/`; // Set cookie
-            login(data.username); // Actualiza el estado de autenticación
-            navigate('/'); // Navigate to home
+            login(email); // Aquí asumimos que el email identifica al usuario en el contexto
+            navigate('/'); // Navega a la página principal
         } else {
-            // Handle error
+            // Manejo de error
             console.error('Failed to log in');
         }
     };
