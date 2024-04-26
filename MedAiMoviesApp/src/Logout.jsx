@@ -5,6 +5,7 @@ function Logout() {
     const { logout } = useAuth(); // Utilizamos la función de logout del contexto
 
     const handleLogout = async () => {
+        console.log('Logging out...');
         await logout(); // Esto actualizará el estado y limpiará la sesión
     };
 

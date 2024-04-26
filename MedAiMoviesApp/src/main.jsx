@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import ListPage from './ListPage.jsx'
+// import ListPage from './ListPage.jsx'
+import MovieListPage from './MovieListPage.jsx'
 import ContactInfo from './ContactInfo.jsx'
 import Login from './Login.jsx'
 import Register from './Register.jsx'
@@ -14,7 +15,7 @@ const router = createBrowserRouter([{
   element: <App/>,
   children: [{
     path: "",
-    element: <ListPage/>,
+    element: <MovieListPage/>, // Antes era <ListPage/>
   },{
     path: "contactInfo",
     element: <ContactInfo/>,

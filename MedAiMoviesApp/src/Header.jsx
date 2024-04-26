@@ -2,30 +2,31 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from './AuthContext.jsx';
 import UserInfo from './UserInfo.jsx';
-import Logout from './Logout.jsx';
+import Logout from './Logout.jsx'; // Importa el componente Logout
 
 export default function Header() {
-    const { isLoggedIn, logout } = useAuth();
+    const { isLoggedIn } = useAuth();
 
     return (
-        <header>
-            <h1>MedAiMovies</h1>
-            <nav>
-                <ul>
-                    <li><Link to="/">Listado</Link></li>
-                </ul>
-            </nav>
-            <div className="auth-links">
+        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 20px' }}>
+            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <h1>MedAiMovies</h1>
+            </Link>
+            
+            <div>{/* Aquí irá la barra de búsqueda en el futuro */}</div>
+            
+            <div>
                 {isLoggedIn ? (
                     <>
-                        <UserInfo /> {/* Muestra UserInfo que maneja su propio estado */}
-                        <Logout /> {/* Componente Logout para manejar la salida */}
+                        <UserInfo /> {/* Muestra el nombre de usuario */}
+                        <Logout /> {/* Componente de Logout */}
                     </>
                 ) : (
-                    <ul>
-                        <li><Link to="/login">Login</Link></li>
-                        <li><Link to="/register">Registrarse</Link></li>
-                    </ul>
+                    <>
+                        <Link to="/login">Login</Link>
+                        <span> / </span>
+                        <Link to="/register">Registrarse</Link>
+                    </>
                 )}
             </div>
         </header>
