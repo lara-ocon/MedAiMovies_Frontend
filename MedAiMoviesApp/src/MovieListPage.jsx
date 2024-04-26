@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-function Movie({ movie }) {
-  return (
-    <div style={{ flex: '1 1 30%', margin: '10px', textAlign: 'center' }}>
-      <img src={movie.poster} alt={movie.titulo} style={{ width: '100%', height: 'auto' }} />
-      <h3>{movie.titulo}</h3>
-      <p>{movie.fecha_estreno.split('-')[0]}</p>
-    </div>
-  );
-}
 
 function MovieListPage() {
   const [movies, setMovies] = useState([]);
@@ -91,5 +83,16 @@ function PageFilter({ currentPage, onPageChange }) {
     </div>
   );
 }
+
+function Movie({ movie }) {
+    console.log(movie);
+    return (
+      <Link to={`/movie/${movie.id}`} style={{ flex: '1 1 30%', margin: '10px', textAlign: 'center', textDecoration: 'none', color: 'inherit' }}>
+        <img src={movie.poster} alt={movie.titulo} style={{ width: '100%', height: 'auto' }} />
+        <h3>{movie.titulo}</h3>
+        <p>{movie.fecha_estreno.split('-')[0]}</p>
+      </Link>
+    );
+  }
 
 export default MovieListPage;

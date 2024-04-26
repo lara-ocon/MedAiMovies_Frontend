@@ -6,6 +6,7 @@ import MovieListPage from './MovieListPage.jsx'
 import ContactInfo from './ContactInfo.jsx'
 import Login from './Login.jsx'
 import Register from './Register.jsx'
+import MovieDetailPage from './MovieDetailPage.jsx';
 import { AuthProvider } from './AuthContext.jsx';
 import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -16,7 +17,12 @@ const router = createBrowserRouter([{
   children: [{
     path: "",
     element: <MovieListPage/>, // Antes era <ListPage/>
-  },{
+  },
+  {
+    path: "movie/:movieId",
+    element: <MovieDetailPage/>,
+  },
+  {
     path: "contactInfo",
     element: <ContactInfo/>,
   },
