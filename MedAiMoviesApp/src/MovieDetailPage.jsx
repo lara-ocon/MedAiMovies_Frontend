@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import MovieReviews from './MovieReviews';
 
 function MovieDetailPage() {
   const { movieId } = useParams(); // Obtenemos el parámetro de la URL
@@ -37,6 +38,7 @@ function MovieDetailPage() {
       ) : (
         <p>Cargando...</p>
       )}
+      <MovieReviews movieId={movieId} />
     </div>
   );
 }
