@@ -10,6 +10,8 @@ function UserInfo() {
                     method: 'GET',
                     credentials: 'include', // Incluye las cookies en la solicitud
                 });
+                console.log('Cookies en userinfo:', document.cookie);
+
                 if (response.ok) {
                     const data = await response.json();
                     console.log(data);

@@ -16,6 +16,7 @@ export default function Login() {
             credentials: 'include', // Importante para las cookies de sesión
             body: JSON.stringify({email, password})
         });
+        console.log('Cookies en login:', document.cookie);
 
         if (response.ok) {
             login(email); // Aquí asumimos que el email identifica al usuario en el contexto

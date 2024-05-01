@@ -6,6 +6,8 @@ function Logout() {
 
     const handleLogout = async () => {
         console.log('Logging out...');
+        console.log('Cookies en loginout:', document.cookie);
+
         await logout(); // Esto actualizará el estado y limpiará la sesión
     };
 
