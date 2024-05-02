@@ -2,12 +2,17 @@
     flex: 1 1 30%;
     margin: 10px;
     text-align: center;
-    text-decoration: none;
-    color: inherit;
     max-width: 400px; /* Límite del ancho máximo de cada película */
 }
 
 .movie img {
-    width: 100%;
-    height: auto;
+    width: 80%;
+}
+
+.movie h3 {
+    color: black;
+    font-family:'Comic Sans MS';
+    font-weight: bolder;
+    font-size: 20px;
+    margin-top: 10px;
 }
