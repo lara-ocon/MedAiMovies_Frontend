@@ -3,26 +3,24 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext.jsx';
 import UserInfo from './UserInfo.jsx';
 import Logout from './Logout.jsx'; // Importa el componente Logout
+import './header.css'; // Importa los estilos definidos anteriormente
 
 export default function Header() {
     const { isLoggedIn } = useAuth();
-    const [searchTerm, setSearchTerm] = useState(''); // Estado para la barra de búsqueda
-    const navigate = useNavigate(); // Hook de navegación
+    const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
 
-    // Función para manejar la búsqueda
     const handleSearch = (event) => {
         event.preventDefault();
         navigate(`/search?q=${encodeURIComponent(searchTerm)}`);
     };
 
-
     return (
-        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 20px' }}>
+        <header className="header-container">
             <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <h1>MedAiMovies</h1>
             </Link>
-            
-            {/* Barra de búsqueda */}
+
             <form onSubmit={handleSearch} style={{ display: 'flex' }}>
                 <input
                     type="text"
@@ -34,16 +32,15 @@ export default function Header() {
                 <button type="submit">Buscar</button>
             </form>
 
-            <div>
+            <div className="auth-links">
                 {isLoggedIn ? (
                     <>
-                        <UserInfo /> {/* Muestra el nombre de usuario */}
-                        <Logout /> {/* Componente de Logout */}
+                        <UserInfo />
+                        <Logout />
                     </>
                 ) : (
                     <>
                         <Link to="/login">Login</Link>
-                        <span> / </span>
                         <Link to="/register">Registrarse</Link>
                     </>
                 )}
