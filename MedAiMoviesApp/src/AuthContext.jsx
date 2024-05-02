@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
                 method: 'DELETE',
                 credentials: 'include', // Para asegurar que se envíen las cookies
             });
+            console.log('logour response:', response);
             if (response.ok) {
                 setIsLoggedIn(false);
                 setUsername('');
