@@ -17,17 +17,16 @@ export default function Header() {
 
     return (
         <header className="header-container">
-            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link to="/">
                 <h1>MedAiMovies</h1>
             </Link>
 
-            <form onSubmit={handleSearch} style={{ display: 'flex' }}>
+            <form onSubmit={handleSearch}>
                 <input
                     type="text"
-                    placeholder="Buscar películas..."
+                    placeholder="🔎 Buscar películas..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{ marginRight: '10px' }}
                 />
                 <button type="submit">Buscar</button>
             </form>

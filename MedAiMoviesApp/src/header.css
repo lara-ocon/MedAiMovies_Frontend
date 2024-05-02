@@ -1,25 +1,73 @@
+@font-face {
+    font-family: 'Paralines';
+    src: url('Paralines-Regular.otf') format('opentype');
+    font-weight: bold;
+}
+
+* {
+    color: white;
+    font-family: fantasy;
+    text-decoration: none;
+}
+
 .header-container {
+    padding: 18px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    background-color: #f45454;
 }
 
-.auth-links {
+.header-container h1 {
+    font-family: "Paralines";
+    font-size: 50px;
+    padding: 0px 0px 3px 0px;
+}
+
+.header-container form {
     display: flex;
+    align-items: center;
+    margin-right: 100px;
 }
 
-.auth-links a, .auth-links button {
-    margin-left: 10px; /* Ajusta el espacio entre los enlaces */
-    text-decoration: none;
-    /*background-color: white; /* Fondo blanco */
-    color: white; /* Texto en negro */
-    border: 1px solid #ccc; /* Borde sutil */
-    padding: 5px 10px;
-    border-radius: 5px;
+.header-container form button {
+    padding: 10px 20px;
+    border: 2.5px solid #000000;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: #f45454;
+    transition: background-color 0.2s ease;
+    transition: color 0.2s ease;
     cursor: pointer;
 }
 
-.auth-links a:hover, .auth-links button:hover {
-    background-color: #f8f8f8c1; /* Cambio de color al pasar el ratón */
+.header-container form button:hover {
+    color: rgb(255, 225, 0);
+    background-color: #951b1b;
+}
+
+.header-container form input {
+    padding: 12px 12px;
+    margin-right: 10px;
+    border: 2.5px solid #000000;
+    border-radius: 8px;
+    font-size: 15px;
+    color: black;
+    background-color: #fab8b8;
+    width: 200px;
+}
+
+.header-container form input:focus {
+    outline: none;
+}
+
+.auth-links a {
+    padding: 5px 10px;
+    margin-left: 10px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.auth-links a:hover {
+    color: rgb(255, 225, 0);
 }
