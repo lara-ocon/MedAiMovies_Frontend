@@ -1,8 +1,9 @@
 .movie {
     flex: 1 1 30%;
-    margin: 10px;
+    margin: 0px;
+    margin-top:20px;
     text-align: center;
-    max-width: 400px; /* Límite del ancho máximo de cada película */
+    max-width: 500px; /* Límite del ancho máximo de cada película */
 }
 
 .movie img {
@@ -13,7 +14,7 @@
 
 .movie h3 {
     color: black;
-    font-family:'Comic Sans MS';
+    font-family:'Arial';
     font-size: 20px;
     margin-top: 10px;
 }
