@@ -31,14 +31,35 @@ export default function Register() {
         }
     };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre completo" required />
-            <input type="text" value={tel} onChange={e => setTel(e.target.value)} placeholder="Teléfono" />
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Correo electrónico" required />
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Contraseña" required />
-            <input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Confirma la contraseña" required />
-            <button type="submit">Registrarse</button>
-        </form>
+    return (<div className="container">
+        <h1>Register</h1>
+        <div className="info">
+            <form onSubmit={handleSubmit}>
+                <div className="form-control">
+                    <label htmlFor="name">Nombre</label>
+                    <input type="text" id="name" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Nombre completo" required />
+                </div>
+                <div className="form-control">
+                    <label htmlFor="tel">Teléfono</label>
+                    <input type="text" id="tel" value={tel} onChange={e => setTel(e.target.value)} placeholder="Teléfono" />
+                </div>
+                <div className="form-control">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Correo electrónico" required />
+                </div>
+                <div className="form-control">
+                    <label htmlFor="password">Contraseña</label>
+                    <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Contraseña" required />
+                </div>
+                <div className="form-control">
+                    <label htmlFor="confirmPassword">Confirma la contraseña</label>
+                    <input type="password" id="confirmPassword" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholder="Confirma la contraseña" required />
+                </div>
+                <div className="login-button">
+                    <button type="submit">Register</button>
+                </div>
+            </form>
+        </div>
+        </div>
     );
 }

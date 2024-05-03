@@ -1,8 +1,9 @@
 import React from 'react';
 import { useAuth } from './AuthContext.jsx';
+import './templates/header.css'; // Importa los estilos definidos anteriormente
 
 // Boton de logout en la barra de navegación
-function Logout() {
+export default function Logout() {
     const { logout } = useAuth(); // Utilizamos la función de logout del contexto
 
     const handleLogout = async () => {
@@ -13,7 +14,5 @@ function Logout() {
         await logout();
     };
 
-    return <button onClick={handleLogout}>Logout</button>;
+    return <button id="logout-button" onClick={handleLogout}>Logout</button>;
 }
-
-export default Logout;

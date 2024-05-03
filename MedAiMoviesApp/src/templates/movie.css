@@ -7,12 +7,13 @@
 
 .movie img {
     width: 80%;
+    margin-right: 20px;
+    border-radius: 10px;
 }
 
 .movie h3 {
     color: black;
     font-family:'Comic Sans MS';
-    font-weight: bolder;
     font-size: 20px;
     margin-top: 10px;
 }

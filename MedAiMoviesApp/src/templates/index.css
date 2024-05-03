@@ -1,0 +1,122 @@
+body {
+  background-color: #ffd8d8;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: black
+}
+
+.container {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+p {
+  margin: 5px 0;
+  color: black
+}
+
+.form-control {
+  margin-bottom: 15px;
+}
+
+.form-control label {
+  color: black;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-control input[type="text"],
+.form-control input[type="password"],
+.form-control input[type="email"],
+.form-control textarea {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: black;
+}
+
+.login-button {
+  text-align: center;
+  margin-top: 20px;
+}
+
+button[type="submit"] {
+  padding: 10px 20px;
+  border: 2.5px solid #000000;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: #f45454;
+  transition: background-color 0.2s ease;
+  transition: color 0.2s ease;
+  cursor: pointer;
+  color: white;
+}
+
+button[type="submit"]:hover {
+  color: rgb(255, 225, 0);
+  background-color: #951b1b;
+}
+
+.page-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.page-filter button {
+  margin: 5px 5px;
+  padding: 10px 15px;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: #f45454;
+  transition: background-color 0.2s ease;
+  transition: color 0.2s ease;
+  cursor: pointer;
+  color: black;
+}
+
+span {
+  color: black;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.page-filter button:hover {
+  color: rgb(255, 225, 0);
+  background-color: #951b1b;
+}
+
+.page-filter button:disabled {
+  background-color: #ffd8d8; /* Indica que está deshabilitado */
+  cursor: not-allowed;
+}
+
+.movies-container {
+  /* display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px; */
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+h3 {
+  color: black;
+  font-family: "Comic Sans MS";
+  font-size: 20px;
+  margin-top: 10px;
+}

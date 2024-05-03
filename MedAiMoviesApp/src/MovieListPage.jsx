@@ -30,11 +30,11 @@ function MovieListPage() {
   }
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+    <div className="movies-container">
       {movies.map((movie, index) => (
         <Movie key={index} movie={movie} />
       ))}
-      <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <div className="page-filter">
         <PageFilter currentPage={currentPage} onPageChange={handlePageChange} />
       </div>
     </div>

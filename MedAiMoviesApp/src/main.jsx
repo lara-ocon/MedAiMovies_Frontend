@@ -1,16 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from './App.jsx'
-// import ListPage from './ListPage.jsx'
 import MovieListPage from './MovieListPage.jsx'
+import MovieDetailPage from './MovieDetailPage.jsx';
 import SearchPage from './SearchPage.jsx'; // Para la búsqueda de pelis
-import ContactInfo from './ContactInfo.jsx'
 import Login from './Login.jsx'
 import Register from './Register.jsx'
-import MovieDetailPage from './MovieDetailPage.jsx';
+import UserInfo from './UserInfo.jsx';
 import { AuthProvider } from './AuthContext.jsx';
-import './index.css'
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import './templates/index.css';
 
 const router = createBrowserRouter([{
   path: "/",
@@ -29,16 +28,16 @@ const router = createBrowserRouter([{
       element: <SearchPage/>,  // Añade esta línea para la página de búsqueda
     },
     {
-      path: "contactInfo",
-      element: <ContactInfo/>,
-    },
-    {
       path: "login",
       element: <Login/>,
     },
     {
       path: "register",
       element: <Register/>,
+    },
+    {
+      path: "userInfo",
+      element: <UserInfo/>,
     }
 ],
 }]);

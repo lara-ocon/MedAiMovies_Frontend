@@ -58,7 +58,7 @@ function MovieReviews({ movieId }) {
       ) : (
         <p>No hay reseñas para esta película.</p>
       )}
-      {isLoggedIn && <ReviewForm movieId={movieId} addReview={addReview} />}  // Solo muestra el formulario si el usuario está autenticado
+      {isLoggedIn && <ReviewForm movieId={movieId} addReview={addReview} />}
     </div>
   );
 }
