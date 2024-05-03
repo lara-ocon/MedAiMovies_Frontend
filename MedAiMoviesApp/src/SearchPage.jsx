@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Movie from './Movie.jsx'; // Importa el componente reutilizable
 
-function SearchPage() {
+export default function SearchPage() {
     const [searchParams] = useSearchParams();
     const [movies, setMovies] = useState([]);
     const query = searchParams.get('q');
+    const type = searchParams.get('t');
 
     useEffect(() => {
         async function fetchMovies() {
             let url = 'http://127.0.0.1:8000/api/peliculas/';
-            url += `search/?q=${encodeURIComponent(query)}`;
+            url += `search/?q=${encodeURIComponent(query)}&t=${encodeURIComponent(type)}`;
 
             /* Se deberia hacer asi pero en el backend ya controlamos 
             // que si no hay query se devuelven todas las peliculas
@@ -28,12 +29,10 @@ function SearchPage() {
     }, [query]);
 
     return (
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div className="movies-container">
             {movies.map(movie => (
                 <Movie key={movie.id} movie={movie} />
             ))}
         </div>
     );
 }
-
-export default SearchPage;

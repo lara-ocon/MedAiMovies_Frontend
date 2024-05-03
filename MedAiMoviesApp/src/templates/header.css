@@ -61,8 +61,23 @@ button[id="logout-button"] {
     background-color: #951b1b;
 }
 
+.header-container form select {
+    padding: 10px 10px;
+    margin-right: 10px;
+    border: 2.5px solid #ffffff;
+    border-radius: 8px;
+    font-size: 15px;
+    color: black;
+    background-color: #fab8b8;
+    width: 60%;
+}
+
+.header-container form select:focus {
+    outline: none;
+}
+
 .header-container form input {
-    padding: 10.5px 12px;
+    padding: 10px 12px;
     margin-right: 10px;
     border: 2.5px solid #ffffff;
     border-radius: 8px;

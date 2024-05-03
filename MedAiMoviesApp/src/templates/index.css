@@ -10,6 +10,13 @@ h1 {
   color: black
 }
 
+h3 {
+  color: black;
+  font-family: "Comic Sans MS";
+  font-size: 20px;
+  margin-top: 10px;
+}
+
 .container {
   max-width: 400px;
   margin: 20px auto;
@@ -112,11 +119,4 @@ span {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
-
-h3 {
-  color: black;
-  font-family: "Comic Sans MS";
-  font-size: 20px;
-  margin-top: 10px;
 }
