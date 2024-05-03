@@ -46,7 +46,7 @@ button[id="logout-button"] {
 
 .header-container form button {
     padding: 10px 20px;
-    border: 2.5px solid #000000;
+    border: 2.5px solid #ffffff;
     border-radius: 8px;
     font-size: 15px;
     background-color: #f45454;
@@ -57,14 +57,14 @@ button[id="logout-button"] {
 }
 
 .header-container form button:hover {
-    color: rgb(255, 225, 0);
+    color: rgb(0, 0, 0);
     background-color: #951b1b;
 }
 
 .header-container form input {
     padding: 10.5px 12px;
     margin-right: 10px;
-    border: 2.5px solid #000000;
+    border: 2.5px solid #ffffff;
     border-radius: 8px;
     font-size: 15px;
     color: black;
@@ -85,7 +85,7 @@ button[id="logout-button"] {
 }
 
 .auth-links a:hover, button:hover{
-    color: rgb(255, 225, 0);
+    color: rgb(0, 0, 0);
 }
 
 footer {
