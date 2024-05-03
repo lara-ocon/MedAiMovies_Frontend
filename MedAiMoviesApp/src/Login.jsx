@@ -17,6 +17,10 @@ export default function Login() {
             body: JSON.stringify({email, password})
         });
         console.log('Cookies en login:', document.cookie);
+        // guarda el token en local storage
+        const data = await response.json();
+        localStorage.setItem('token', data.token);
+        console.log('Token:', data);
 
         if (response.ok) {
             login(email); // Aquí asumimos que el email identifica al usuario en el contexto

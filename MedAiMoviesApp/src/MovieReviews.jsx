@@ -85,6 +85,7 @@ function ReviewForm({ movieId, addReview }) {
     const handleSubmit = async (event) => {
       event.preventDefault();
       const token = localStorage.getItem('token');
+      console.log('Token from reviews:', token);
       const response = await fetch('http://127.0.0.1:8000/api/reviews/', {
         method: 'POST',
         headers: {
