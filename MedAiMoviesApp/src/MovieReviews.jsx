@@ -3,7 +3,7 @@ import { useAuth } from './AuthContext';
 
 function MovieReviews({ movieId }) {
   const [reviews, setReviews] = useState([]);
-  const { isLoggedIn } = useAuth(); // Para poder hacer reviews o no
+  const { isLoggedIn} = useAuth(); // Para poder hacer reviews o no
 
   useEffect(() => {
     /* //Forma 1
@@ -81,6 +81,8 @@ function StarRating({ rating }) {
 function ReviewForm({ movieId, addReview }) {
     const [calificacion, setCalificacion] = useState(5);
     const [comentario, setComentario] = useState('');
+    const { username } = useAuth();
+    console.log('Username from reviews:', username);
   
     const handleSubmit = async (event) => {
       event.preventDefault();
@@ -95,6 +97,7 @@ function ReviewForm({ movieId, addReview }) {
         credentials: 'include',
         body: JSON.stringify({
           pelicula: movieId,
+          usuario: username,
           calificacion,
           comentario
         })
