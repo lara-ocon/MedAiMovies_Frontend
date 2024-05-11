@@ -18,12 +18,13 @@ export default function Login() {
         });
         console.log('Cookies en login:', document.cookie);
         // guarda el token en local storage
-        const data = await response.json();
-        localStorage.setItem('token', data.token);
-        console.log('Token:', data);
 
         if (response.ok) {
-            login(email); // Aquí asumimos que el email identifica al usuario en el contexto
+            const data = await response.json();
+            localStorage.setItem('token', data.token);
+            console.log('data y Token:', data);
+            //login(email); // Aquí asumimos que el email identifica al usuario en el contexto
+            login({ username: email, userId: data.userId })
             navigate('/'); // Navega a la página principal
         } else {
             // Manejo de error

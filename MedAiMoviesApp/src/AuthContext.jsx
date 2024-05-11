@@ -11,10 +11,18 @@ export function useAuth() {
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
+    const [userId, setUserId] = useState(null);  // Agregar userId al estado
 
+    /*
     const login = (name) => {
         setIsLoggedIn(true);
         setUsername(name);
+    };
+    */
+    const login = (userDetails) => {
+        setIsLoggedIn(true);
+        setUsername(userDetails.username);
+        setUserId(userDetails.userId);  // Guardar userId proporcionado por el backend
     };
 
     const logout = async () => {
@@ -27,6 +35,8 @@ export const AuthProvider = ({ children }) => {
             if (response.ok) {
                 setIsLoggedIn(false);
                 setUsername('');
+                setUserId(null);  // Limpiar userId
+                localStorage.removeItem('token');
             } else {
                 console.error('Failed to logout');
             }
@@ -36,7 +46,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, username, login, logout }}>
+        <AuthContext.Provider value={{ isLoggedIn, username, userId, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

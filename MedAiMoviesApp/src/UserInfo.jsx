@@ -21,7 +21,7 @@ export default function UserInfo() {
                     setTel(data.tel);
                     setEmail(data.email);
                     setPassword(data.password);
-                    console.log(data);
+                    console.log('idddd',data.id);
                 } else {
                     setUsername(null);
                     setTel(null);
