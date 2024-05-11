@@ -41,6 +41,7 @@ function MovieReviews({ movieId }) {
   const addReview = (review) => {
     setReviews([...reviews, review]);
   };
+  console.log('Reviews:', reviews);
 
   return (
     <div>
@@ -48,7 +49,7 @@ function MovieReviews({ movieId }) {
       {reviews.length > 0 ? (
         reviews.map(review => (
           <div key={review.id} style={{ borderBottom: '1px solid #ccc', paddingBottom: '10px', marginBottom: '10px' }}>
-            <h4>{review.usuario.nombre} - {review.fecha_creacion.slice(0, 10)}</h4>
+            <h4>{review.usuario_email} - {review.fecha_creacion.slice(0, 10)}</h4>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <StarRating rating={review.calificacion} />
               <p style={{ marginLeft: '10px' }}>{review.comentario}</p>
