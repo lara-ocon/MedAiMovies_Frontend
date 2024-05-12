@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect} from 'react';
 
 const AuthContext = createContext(null);
 
@@ -44,6 +44,34 @@ export const AuthProvider = ({ children }) => {
             console.error('Error logging out:', error);
         }
     };
+
+    useEffect(() => {
+        const checkLoggedIn = async () => {
+            const token = localStorage.getItem('token');
+            if (token) {
+                try {
+                    const response = await fetch('http://127.0.0.1:8000/api/users/me/', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        credentials: 'include',
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        login({ username: data.email, userId: data.id });
+                    } else {
+                        console.error('Failed to fetch user info');
+                    }
+                } catch (error) {
+                    console.error('Error fetching user info:', error);
+                }
+            }
+        }
+
+        checkLoggedIn();
+    }
+    , []);
 
     return (
         <AuthContext.Provider value={{ isLoggedIn, username, userId, login, logout }}>
