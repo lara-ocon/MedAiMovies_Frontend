@@ -5,6 +5,7 @@ export default function UserInfo() {
     const [tel, setTel] = useState(null);
     const [email, setEmail] = useState(null);
     const [password, setPassword] = useState(null);
+    const [id, setId] = useState(null);
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -21,7 +22,8 @@ export default function UserInfo() {
                     setTel(data.tel);
                     setEmail(data.email);
                     setPassword(data.password);
-                    console.log('idddd',data.id);
+                    console.log('id',data.id);
+                    setId(data.id);
                 } else {
                     setUsername(null);
                     setTel(null);
@@ -36,10 +38,38 @@ export default function UserInfo() {
         fetchUserInfo();
     }, []);
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log('username',username);
+        console.log('tel',tel);
+        console.log('email',email);
+        console.log('pass', password);
+        const response = await fetch('http://127.0.0.1:8000/api/users/me/', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include', 
+            body: JSON.stringify({
+                id,
+                nombre: username,
+                tel,
+                email,
+                password
+            })
+        });
+
+        if (response.ok) {
+            console.log('User info updated successfully');
+        } else {
+            console.error('Failed to update user info');
+        }
+    }
+
     return (<div className="container">
     <h1>Atualizar Datos</h1>
     <div className="info">
-        <form> {/* Aquí habría que poner un onSubmit={handleSubmit} y definirse esa función con lo que queremos que haga (actualizar los datos del usuario. De momento solo se muestran los datos actuales y si se pulsa "Actualizar" no pasa nada*/}
+        <form onSubmit={handleSubmit}>
             <div className="form-control">
                 <label htmlFor="name">Nombre</label>
                 <input type="text" id="name" value={username} onChange={e => setUsername(e.target.value)} placeholder="Nombre completo" required />
@@ -47,10 +77,6 @@ export default function UserInfo() {
             <div className="form-control">
                 <label htmlFor="tel">Teléfono</label>
                 <input type="text" id="tel" value={tel} onChange={e => setTel(e.target.value)} placeholder="Teléfono" />
-            </div>
-            <div className="form-control">
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Correo electrónico" required />
             </div>
             <div className="login-button">
                 <button type="submit">Actualizar</button>

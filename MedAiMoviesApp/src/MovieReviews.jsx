@@ -3,7 +3,7 @@ import { useAuth } from './AuthContext';
 
 function MovieReviews({ movieId }) {
   const [reviews, setReviews] = useState([]);
-  const { isLoggedIn, userId } = useAuth();  // Asumiendo que ahora `useAuth` también proporciona `userId`.
+  const { isLoggedIn, userId } = useAuth();  
 
   useEffect(() => {
     async function fetchReviews() {
@@ -88,10 +88,12 @@ function ReviewForm({ movieId, addReview, userId }) {
     if (response.ok) {
       const newReview = await response.json();
       addReview(newReview);
+      setComentario(''); 
     } else {
       console.error('Failed to submit review', response.statusText);
     }
   };
+
 
   return (
     <form onSubmit={handleSubmit}>
