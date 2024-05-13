@@ -10,14 +10,17 @@ function MovieListPage() {
   useEffect(() => {
     async function fetchMovies() {
       let loadedMovies = [];
-      let currentId = (currentPage - 1) * totalMoviesPerPage + 1;
-      currentId = ((currentId + 1) % 3) + 1;
+      let currentId = (currentPage - 1) * totalMoviesPerPage;
+      console.log("Fetching currentpage" + currentPage + "...")
+      currentId = ((currentId) % 20);
+
       while (loadedMovies.length < totalMoviesPerPage) {
-        const response = await fetch(`http://127.0.0.1:8000/api/peliculas/${currentId}/`);
+        console.log("Fetching " + currentId + "...")
+        const response = await fetch(`http://127.0.0.1:8000/api/peliculas/${currentId+1}/`);
         if (!response.ok) continue;
         const data = await response.json();
         loadedMovies.push(data);
-        currentId = ((currentId + 1) % 3) + 1; // Simular que solo hay 3 películas en la API
+        currentId = ((currentId + 1) % 20); // Simular que solo hay 3 películas en la API
       }
       setMovies(loadedMovies);
     }
