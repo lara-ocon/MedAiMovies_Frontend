@@ -11,8 +11,7 @@ export function useAuth() {
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
-    const [userId, setUserId] = useState(null);  // Agregar userId al estado
-
+    const [userId, setUserId] = useState(0);  // Agregar userId al estado
     /*
     const login = (name) => {
         setIsLoggedIn(true);
@@ -45,6 +44,27 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const deleteAccount = async () => {
+        console.log('deleteAccount');
+        try {
+            const response = await fetch('http://127.0.0.1:8000/api/users/me/', {
+                method: 'DELETE',
+                credentials: 'include',
+            });
+            if (response.ok) {
+                setIsLoggedIn(false);
+                setUsername('');
+                setUserId(null);
+                localStorage.removeItem('token');
+            } else {
+                console.error('Failed to delete account');
+            }
+        }
+        catch (error) {
+            console.error('Error deleting account:', error);
+        }
+    };
+
     useEffect(() => {
         const checkLoggedIn = async () => {
             const token = localStorage.getItem('token');
@@ -74,7 +94,7 @@ export const AuthProvider = ({ children }) => {
     , []);
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, username, userId, login, logout }}>
+        <AuthContext.Provider value={{ isLoggedIn, username, userId, login, logout, deleteAccount}}>
             {children}
         </AuthContext.Provider>
     );

@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from './AuthContext.jsx';
+import { useNavigate } from "react-router-dom";
 
 export default function UserInfo() {
-    const [username, setUsername] = useState(null);
-    const [tel, setTel] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [password, setPassword] = useState(null);
+    const [username, setUsername] = useState('');
+    const [tel, setTel] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [id, setId] = useState(null);
+
+    const navigate = useNavigate();
+    const { deleteAccount } = useAuth();
 
     useEffect(() => {
         const fetchUserInfo = async () => {
@@ -66,8 +71,14 @@ export default function UserInfo() {
         }
     }
 
+    const handleDelete = async (event) => {
+        event.preventDefault(); // Prevent the form from submitting normally
+        await deleteAccount();
+        navigate('/');
+    }
+
     return (<div className="container">
-    <h1>Atualizar Datos</h1>
+    <h1>Actualizar Datos</h1>
     <div className="info">
         <form onSubmit={handleSubmit}>
             <div className="form-control">
@@ -82,6 +93,14 @@ export default function UserInfo() {
                 <button type="submit">Actualizar</button>
             </div>
         </form>
+
+        {/* Delete user button */}
+        <form onSubmit={handleDelete}>
+            <div className="login-button">
+                <button type="submit">Eliminar cuenta</button>
+            </div>
+        </form>
+
     </div>
     </div>
 );
