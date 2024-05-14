@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from './AuthContext';
 import './templates/MovieDetailPage.css';
 
-function MovieReviews({ movieId }) {
+function MovieReviews({ movieId , triggerReload }) {
   const [reviews, setReviews] = useState([]);
   const { isLoggedIn, userId } = useAuth();  
 
@@ -45,7 +45,7 @@ function MovieReviews({ movieId }) {
       ) : (
         <p>No hay reseñas para esta película.</p>
       )}
-      {isLoggedIn && <ReviewForm movieId={movieId} addReview={addReview} userId={userId} />}
+      {isLoggedIn && <ReviewForm movieId={movieId} addReview={addReview} userId={userId} triggerReload={triggerReload} />}
     </div>
   );
 }
@@ -63,13 +63,13 @@ function StarRating({ rating }) {
 }
 
 
-function ReviewForm({ movieId, addReview, userId }) {
+function ReviewForm({ movieId, addReview, userId , triggerReload }) {
   const [calificacion, setCalificacion] = useState(5);
   const [comentario, setComentario] = useState('');
 
   const handleSubmit = async (event) => {
-    console.log('movieId', movieId);
-    console.log('userId', userId);
+    // console.log('movieId', movieId);
+    // console.log('userId', userId);
     
     event.preventDefault();
     const token = localStorage.getItem('token');
@@ -91,6 +91,8 @@ function ReviewForm({ movieId, addReview, userId }) {
       const newReview = await response.json();
       addReview(newReview);
       setComentario(''); 
+      console.log('newReview:', newReview);
+      triggerReload(); // Para cambiar el estado y lanzar el useEffect de MovieDetailPage
     } else {
       console.error('Failed to submit review', response.statusText);
     }

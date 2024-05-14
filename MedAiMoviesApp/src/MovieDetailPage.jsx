@@ -5,6 +5,9 @@ import MovieReviews from './MovieReviews';
 function MovieDetailPage() {
   const { movieId } = useParams(); // Obtenemos el parámetro de la URL
   const [movie, setMovie] = useState(null);
+  const [reloadTrigger, setReloadTrigger] = useState(false); // Agregar estado para recargar la página
+
+  const triggerReload = () => setReloadTrigger(!reloadTrigger); // Se debe cambiar el estado para que se ejecute el useEffect
 
   useEffect(() => {
     async function fetchMovie() {
@@ -15,7 +18,7 @@ function MovieDetailPage() {
       }
     }
     fetchMovie();
-  }, [movieId]);
+  }, [movieId, reloadTrigger]); // si cambia movieId o reloadTrigger, se ejecuta el efecto
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
@@ -38,7 +41,7 @@ function MovieDetailPage() {
       ) : (
         <p>Cargando...</p>
       )}
-      <MovieReviews movieId={movieId} />
+      <MovieReviews movieId={movieId} triggerReload={triggerReload} />
     </div>
   );
 }
