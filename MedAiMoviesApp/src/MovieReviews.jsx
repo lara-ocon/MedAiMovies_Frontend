@@ -34,11 +34,11 @@ function MovieReviews({ movieId }) {
       <h3>Reseñas</h3>
       {reviews.length > 0 ? (
         reviews.map(review => (
-          <div key={review.id} style={{ borderBottom: '1px solid #ccc', paddingBottom: '10px', marginBottom: '10px' }}>
-            <h4 id="review">{review.usuario_email} - {review.fecha_creacion.slice(0, 10)}</h4>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div id="review" key={review.id}>
+            <h4>{review.usuario_email} - {review.fecha_creacion.slice(0, 10)}</h4>
+            <div id="stars-review">
               <StarRating rating={review.calificacion} />
-              <p style={{ marginLeft: '10px' }}>{review.comentario}</p>
+              <p>{review.comentario}</p>
             </div>
           </div>
         ))
@@ -99,19 +99,20 @@ function ReviewForm({ movieId, addReview, userId }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Calificación:
-        <select value={calificacion} onChange={e => setCalificacion(Number(e.target.value))}>
-          {[1, 2, 3, 4, 5].map(n => (
-            <option key={n} value={n}>{n}</option>
+      <div>
+        <label htmlFor='comment'> Comentario:</label>
+        <textarea id="comment" value={comentario} onChange={e => setComentario(e.target.value)} />
+      </div>
+      <label htmlFor='grade'>Calificación:</label>
+      <select id="grade" value={calificacion} onChange={e => setCalificacion(Number(e.target.value))}>
+        {[1, 2, 3, 4, 5].map(n => (
+          <option key={n} value={n}>{n}</option>
           ))}
-        </select>
-      </label>
-      <label>
-        Comentario:
-        <textarea value={comentario} onChange={e => setComentario(e.target.value)} />
-      </label>
-      <button type="submit">Enviar Reseña</button>
+      </select>
+      <br />
+      <div id="review-button">
+        <button type="submit">Enviar Reseña</button>
+      </div>
     </form>
   );
 }
