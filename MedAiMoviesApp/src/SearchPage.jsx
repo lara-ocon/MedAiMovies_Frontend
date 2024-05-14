@@ -11,7 +11,8 @@ export default function SearchPage() {
     useEffect(() => {
         async function fetchMovies() {
             let url = 'http://127.0.0.1:8000/api/peliculas/';
-            url += `search/?q=${encodeURIComponent(query)}&t=${encodeURIComponent(type)}`;
+            //url += `search/?q=${encodeURIComponent(query)}&t=${encodeURIComponent(type)}`;
+            url += `search/?${encodeURIComponent(type)}=${encodeURIComponent(query)}`;
 
             /* Se deberia hacer asi pero en el backend ya controlamos 
             // que si no hay query se devuelven todas las peliculas
