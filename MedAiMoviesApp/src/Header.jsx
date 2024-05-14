@@ -22,6 +22,12 @@ export default function Header() {
         setSearchTerm('');
     };
 
+    // Controlar que la barra de búsqueda sea de tipo texto o número
+    const inputType = searchType === 'nota' ? 'number' : 'text';
+    const placeholder = searchType === 'nota' ? 'Ingrese la nota (1-5)...' : '🔎 Buscar películas...';
+    const min = searchType === 'nota' ? 1 : undefined;
+    const max = searchType === 'nota' ? 5 : undefined;
+
     return (
         <header className="header-container">
             <Link to="/">
@@ -37,10 +43,12 @@ export default function Header() {
                     <option value="nota">Nota</option>
                 </select>
                 <input
-                    type="text"
-                    placeholder="🔎 Buscar películas..."
+                    type={inputType}
+                    placeholder={placeholder}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    min={min}
+                    max={max}
                 />
                 <button type="submit">Buscar</button>
             </form>

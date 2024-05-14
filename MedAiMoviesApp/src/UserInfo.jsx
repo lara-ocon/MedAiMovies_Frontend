@@ -1,75 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useLoaderData, useActionData, Form, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext.jsx';
-import { useNavigate } from "react-router-dom";
 
 export default function UserInfo() {
-    const [username, setUsername] = useState('');
-    const [tel, setTel] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [id, setId] = useState(null);
-
     const navigate = useNavigate();
+    const userInfo = useLoaderData(); // Obtiene los datos del loader
+    const actionData = useActionData(); // Obtiene los datos de la acción del router
     const { deleteAccount } = useAuth();
 
-    useEffect(() => {
-        const fetchUserInfo = async () => {
-            try {
-                const response = await fetch('http://127.0.0.1:8000/api/users/me/', {
-                    method: 'GET',
-                    credentials: 'include', // Incluye las cookies en la solicitud
-                });
-                console.log('Cookies en userinfo:', document.cookie);
+    // Actualizar el estado local con los datos del loader
+    const [username, setUsername] = React.useState(userInfo.nombre);
+    const [tel, setTel] = React.useState(userInfo.tel);
+    const [email, setEmail] = React.useState(userInfo.email);
+    const [password, setPassword] = React.useState(userInfo.password);
+    const [id, setId] = React.useState(userInfo.id);
 
-                if (response.ok) {
-                    const data = await response.json();
-                    setUsername(data.nombre);
-                    setTel(data.tel);
-                    setEmail(data.email);
-                    setPassword(data.password);
-                    console.log('id',data.id);
-                    setId(data.id);
-                } else {
-                    setUsername(null);
-                    setTel(null);
-                    setEmail(null);
-                    setPassword(null);
-                }
-            } catch (error) {
-                console.error('Error fetching user info:', error);
+    // Si hay respuesta de la acción, maneja la actualización
+    React.useEffect(() => {
+        if (actionData) {
+            if (actionData.error) {
+                alert(actionData.error);
             }
-        };
-
-        fetchUserInfo();
-    }, []);
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log('username',username);
-        console.log('tel',tel);
-        console.log('email',email);
-        console.log('pass', password);
-        const response = await fetch('http://127.0.0.1:8000/api/users/me/', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include', 
-            body: JSON.stringify({
-                id,
-                nombre: username,
-                tel,
-                email,
-                password
-            })
-        });
-
-        if (response.ok) {
-            console.log('User info updated successfully');
-        } else {
-            console.error('Failed to update user info');
         }
-    }
+    }, [actionData]);
 
     const handleDelete = async (event) => {
         event.preventDefault(); // Prevent the form from submitting normally
@@ -77,31 +30,34 @@ export default function UserInfo() {
         navigate('/');
     }
 
-    return (<div className="container">
-    <h1>Actualizar Datos</h1>
-    <div className="info">
-        <form onSubmit={handleSubmit}>
-            <div className="form-control">
-                <label htmlFor="name">Nombre</label>
-                <input type="text" id="name" value={username} onChange={e => setUsername(e.target.value)} placeholder="Nombre completo" required />
-            </div>
-            <div className="form-control">
-                <label htmlFor="tel">Teléfono</label>
-                <input type="text" id="tel" value={tel} onChange={e => setTel(e.target.value)} placeholder="Teléfono" />
-            </div>
-            <div className="login-button">
-                <button type="submit">Actualizar</button>
-            </div>
-        </form>
+    return (
+        <div className="container">
+            <h1>Actualizar Datos</h1>
+            <div className="info">
+                <Form method="post">
+                    <input type="hidden" name="id" value={id} />
+                    <input type="hidden" name="email" value={email} />
+                    <input type="hidden" name="password" value={password} />
+                    <div className="form-control">
+                        <label htmlFor="name">Nombre</label>
+                        <input type="text" id="name" name="nombre" value={username} onChange={e => setUsername(e.target.value)} placeholder="Nombre completo" required />
+                    </div>
+                    <div className="form-control">
+                        <label htmlFor="tel">Teléfono</label>
+                        <input type="text" id="tel" name="tel" value={tel} onChange={e => setTel(e.target.value)} placeholder="Teléfono" />
+                    </div>
+                    <div className="login-button">
+                        <button type="submit">Actualizar</button>
+                    </div>
+                </Form>
 
-        {/* Delete user button */}
-        <form onSubmit={handleDelete}>
-            <div className="login-button">
-                <button type="submit">Eliminar cuenta</button>
+                {/* Delete user button */}
+                <form onSubmit={handleDelete}>
+                    <div className="login-button">
+                        <button type="submit">Eliminar cuenta</button>
+                    </div>
+                </form>
             </div>
-        </form>
-
-    </div>
-    </div>
-);
+        </div>
+    );
 }
