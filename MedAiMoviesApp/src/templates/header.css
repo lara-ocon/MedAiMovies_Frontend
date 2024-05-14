@@ -72,6 +72,14 @@ button[id="logout-button"] {
     width: 60%;
 }
 
+#desplegable {
+    width: 100px;
+}
+
+#search-input {
+    width: 150px;
+}
+
 .header-container form select:focus {
     outline: none;
 }

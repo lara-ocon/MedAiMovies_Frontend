@@ -9,7 +9,6 @@ export default function Login() {
 
     // Si el login es exitoso, pasamos la respuesta a la función login del contexto
     useEffect(() => {
-        console.log('actionData', actionData);
         if (actionData && actionData.email && actionData.userId) {
             console.log('Login exitoso');
             login({ username: actionData.email, userId: actionData.userId });
@@ -22,16 +21,13 @@ export default function Login() {
         [actionData, login, navigate]);
 
     // si hay error
-    const error = actionData?.message;
-    
-
+    const error = actionData?.error;
 
     return (
         <div className="container">
             <h1>Login</h1>
             <Form method="post">
                 <div className="info">
-                    {error && <p className="error">{error}</p>}
                     <div className="form-control">
                         <label htmlFor="email">Email</label>
                         <input type="email" name="email" required />
@@ -40,6 +36,7 @@ export default function Login() {
                         <label htmlFor="password">Contraseña</label>
                         <input type="password" name="password" required />
                     </div>
+                    {error && <p className="error">⚠️{error.substring(11, 34)}</p>}
                     <div className="login-button">
                         <button type="submit">Login</button>
                     </div>

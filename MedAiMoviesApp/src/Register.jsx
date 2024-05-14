@@ -17,7 +17,6 @@ export default function Register() {
         <div className="container">
             <h1>Register</h1>
             <div className="info">
-                {error && <p className="error">{error}</p>}
                 <Form method="post">
                     <div className="form-control">
                         <label htmlFor="nombre">Nombre</label>
@@ -39,6 +38,7 @@ export default function Register() {
                         <label htmlFor="confirmPassword">Confirma la contraseña</label>
                         <input type="password" name="confirmPassword" placeholder="Confirma la contraseña" required />
                     </div>
+                    {error && <p className="error">⚠️{error}</p>}
                     <div className="login-button">
                         <button type="submit">Register</button>
                     </div>

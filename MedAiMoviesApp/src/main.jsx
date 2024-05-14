@@ -100,7 +100,10 @@ const router = createBrowserRouter([{
 
         if (!response.ok) {
           const errorData = await response.json();
-          return { error: errorData.detail || 'Por favor, verifica los datos introducidos.' };
+          if (errorData.email) return { error: errorData.email[0] };
+          if (errorData.tel) return { error: errorData.tel[0] };
+          if (errorData.password) return { error: errorData.password[0] };
+          return {error: 'Por favor, verifica los datos introducidos.' };
         }
 
         return await response.json();
