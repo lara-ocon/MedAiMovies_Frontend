@@ -66,6 +66,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
+        console.log('useEffectttt');
         const checkLoggedIn = async () => {
             const token = localStorage.getItem('token');
             if (token) {

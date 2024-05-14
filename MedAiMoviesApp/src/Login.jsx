@@ -1,54 +1,47 @@
-import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useActionData, Form } from "react-router-dom";
 import { useAuth } from './AuthContext.jsx';
 
 export default function Login() {
     const { login } = useAuth();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const actionData = useActionData(); // Obtiene los datos de la acción del loader(router)
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const response = await fetch('http://127.0.0.1:8000/api/users/login/', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include', // Importante para las cookies de sesión
-            body: JSON.stringify({email, password})
-        });
-        console.log('Cookies en login:', document.cookie);
-        // guarda el token en local storage
-
-        if (response.ok) {
-            const data = await response.json();
-            localStorage.setItem('token', data.token);
-            console.log('data y Token:', data);
-            //login(email); // Aquí asumimos que el email identifica al usuario en el contexto
-            login({ username: email, userId: data.userId })
+    // Si el login es exitoso, pasamos la respuesta a la función login del contexto
+    useEffect(() => {
+        console.log('actionData', actionData);
+        if (actionData && actionData.email && actionData.userId) {
+            console.log('Login exitoso');
+            login({ username: actionData.email, userId: actionData.userId });
+            localStorage.setItem('token', actionData.token);
             navigate('/'); // Navega a la página principal
-        } else {
-            // Manejo de error
-            console.error('Failed to log in');
         }
-    };
+    },
+        [actionData, login, navigate]);
 
-    return (<div className="container">
-        <h1>Login</h1>
-        <div className="info">
-            <form onSubmit={handleSubmit}>
-                <div className="form-control">
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required />
+    // si hay error
+    const error = actionData?.message;
+
+
+    return (
+        <div className="container">
+            <h1>Login</h1>
+            <Form method="post">
+                <div className="info">
+                    {error && <p className="error">{error}</p>}
+                    <div className="form-control">
+                        <label htmlFor="email">Email</label>
+                        <input type="email" name="email" required />
+                    </div>
+                    <div className="form-control">
+                        <label htmlFor="password">Contraseña</label>
+                        <input type="password" name="password" required />
+                    </div>
+                    <div className="login-button">
+                        <button type="submit">Login</button>
+                    </div>
                 </div>
-                <div className="form-control">
-                    <label htmlFor="password">Contraseña</label>
-                    <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
-                </div>
-                <div className="login-button">
-                    <button type="submit">Login</button>
-                </div>
-            </form>
-        </div>
+            </Form>
         </div>
     );
 }

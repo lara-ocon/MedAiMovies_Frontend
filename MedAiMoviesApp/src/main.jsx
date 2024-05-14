@@ -59,10 +59,52 @@ const router = createBrowserRouter([{
     {
       path: "login",
       element: <Login/>,
+      action: async ({ request }) => {
+        const formData = await request.formData();
+        const email = formData.get('email');
+        const password = formData.get('password');
+        const response = await fetch('http://127.0.0.1:8000/api/users/login/', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          credentials: 'include',
+          body: JSON.stringify({email, password})
+        });
+
+        if (!response.ok) {
+          const error = await response.text();
+          throw new Error(error);
+        }
+        return await response.json();
+      }
     },
     {
       path: "register",
       element: <Register/>,
+      action: async ({ request }) => {
+        const formData = await request.formData();
+        const nombre = formData.get('nombre');
+        const tel = formData.get('tel');
+        const email = formData.get('email');
+        const password = formData.get('password');
+        const confirmPassword = formData.get('confirmPassword');
+
+        if (password !== confirmPassword) {
+          return { error: "Las contraseñas no coinciden." };
+        }
+
+        const response = await fetch('http://127.0.0.1:8000/api/users/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nombre, tel, email, password })
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          return { error: errorData.detail || 'Por favor, verifica los datos introducidos.' };
+        }
+
+        return await response.json();
+      }
     },
     {
       path: "userInfo",
