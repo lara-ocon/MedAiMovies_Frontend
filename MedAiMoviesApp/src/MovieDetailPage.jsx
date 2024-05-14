@@ -1,24 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLoaderData, useParams, useNavigate } from 'react-router-dom';
 import MovieReviews from './MovieReviews';
 
 function MovieDetailPage() {
-  const { movieId } = useParams(); // Obtenemos el parámetro de la URL
-  const [movie, setMovie] = useState(null);
-  const [reloadTrigger, setReloadTrigger] = useState(false); // Agregar estado para recargar la página
+  const movie = useLoaderData(); // Obtiene los datos de la película del loader
+  const navigate = useNavigate();
 
-  const triggerReload = () => setReloadTrigger(!reloadTrigger); // Se debe cambiar el estado para que se ejecute el useEffect
-
-  useEffect(() => {
-    async function fetchMovie() {
-      const response = await fetch(`http://127.0.0.1:8000/api/peliculas/${movieId}/`);
-      if (response.ok) {
-        const data = await response.json();
-        setMovie(data);
-      }
-    }
-    fetchMovie();
-  }, [movieId, reloadTrigger]); // si cambia movieId o reloadTrigger, se ejecuta el efecto
+  const reloadMovieDetails = () => {
+    // Forzamos la recarga una vez se hace una review para mostar bien la nota
+    navigate('/movie/' + movie.id);
+  }
 
   return (
     <div id="movie-detail-container">
@@ -41,7 +32,7 @@ function MovieDetailPage() {
       ) : (
         <p>Cargando...</p>
       )}
-      <MovieReviews movieId={movieId} triggerReload={triggerReload} />
+      <MovieReviews movieId={movie.id} triggerReload={reloadMovieDetails} />
     </div>
   );
 }
