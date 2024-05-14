@@ -21,10 +21,10 @@ function MovieDetailPage() {
   }, [movieId, reloadTrigger]); // si cambia movieId o reloadTrigger, se ejecuta el efecto
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '20px' }}>
+    <div id="movie-detail-container">
       {movie ? (
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px' }}>
-          <div style={{ flex: 1 }}>
+        <div id="movie-detail" >
+          <div id="movie-text">
             <h1 style={{ fontSize: '2.5rem', margin: '0 0 20px 0' }}>{movie.titulo}</h1>
             <p id="director">Director: {movie.director}</p>
             <p id="fecha">Fecha de estreno: {movie.fecha_estreno}</p>
@@ -34,8 +34,8 @@ function MovieDetailPage() {
             <p id="nota">Nota: {movie.nota}/5</p>
             <p id="sinopsis">Sinopsis: {movie.sinopsis}</p>
           </div>
-          <div style={{ flex: '0 1 300px', minHeight: '100%' }}>
-            <img src={movie.poster} alt={movie.titulo} style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
+          <div id="movie-image-container">
+            <img id="movie-image" src={movie.poster} alt={movie.titulo}/>
           </div>
         </div>
       ) : (

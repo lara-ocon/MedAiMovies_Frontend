@@ -1,41 +1,74 @@
-.movie-detail-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-}
-
-.movie-detail-content {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.movie-detail-info h1 {
-    font-size: 3rem;
-    color: white;
-    margin: 0;
-}
-
-.movie-detail-info p, .movie-detail-info .sub-details, .synopsis, .genre-duration {
-    color: rgba(255, 255, 255, 0.8); /* Blanco con transparencia para diferenciar información */
-    margin: 5px 0;
-    font-size: 1.2rem;
-}
-
-.genre-duration {
-    font-size: 1rem;
-    margin-top: 10px;
-}
-
-.movie-poster img {
-    display: none; /* Si no quieres mostrar la imagen */
-}
-
 .red .star {
     color: red; /* Colorea las estrellas de rojo hasta el valor de rating */
   }
   
-  .black .star {
+.black .star {
     color: black; /* Colorea las estrellas restantes de negro */
   }
-  
+div[id=movie-detail]{
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+div[id=movie-detail-container]{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+div[id=movie-text]{
+    flex: 1;
+}
+
+div[id=movie-image-container]{
+    flex: 0 1 300px;
+    min-height: 100%;
+}
+
+img[id=movie-image]{
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+div[id=review]{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+div[id=stars-review]{
+    display: flex;
+    align-items: center;
+}
+
+textarea{
+    padding: 10px 12px;
+    margin-top: 5px;
+    border: 2.5px solid #ffffff;
+    border-radius: 8px;
+    font-size: 15px;
+    color: black;
+    background-color: #fab8b8;
+    width: 100%;
+}
+
+select[id=grade] {
+    padding: 10px 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border: 2.5px solid #ffffff;
+    border-radius: 8px;
+    font-size: 15px;
+    color: black;
+    background-color: #fab8b8;
+    width: 5%;
+}
+ 
+select {
+    outline: none;
+}
+
+div[id=review-button]{
+    text-align: center;
+}
