@@ -15,12 +15,15 @@ export default function Login() {
             login({ username: actionData.email, userId: actionData.userId });
             localStorage.setItem('token', actionData.token);
             navigate('/'); // Navega a la página principal
+        } else {
+            console.log('Login fallido');
         }
     },
         [actionData, login, navigate]);
 
     // si hay error
     const error = actionData?.message;
+    
 
 
     return (

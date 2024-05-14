@@ -72,7 +72,7 @@ const router = createBrowserRouter([{
 
         if (!response.ok) {
           const error = await response.text();
-          throw new Error(error);
+          return { error };
         }
         return await response.json();
       }
@@ -109,6 +109,53 @@ const router = createBrowserRouter([{
     {
       path: "userInfo",
       element: <UserInfo/>,
+      loader: async () => {
+        const response = await fetch('http://127.0.0.1:8000/api/users/me/', {
+          method: 'GET',
+          credentials: 'include',
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch user info');
+        }
+        
+        return await response.json();
+      },
+      action: async ({ request }) => {
+        const formData = await request.formData();
+        const nombre = formData.get('nombre');
+        const tel = formData.get('tel');
+        const email = formData.get('email');
+        const password = undefined;
+        const id = formData.get('id');
+        console.log('id:', id);
+        console.log('nombre:', nombre);
+        console.log('tel:', tel);
+        console.log('email:', email);
+        console.log('password', password);
+
+        console.log('formData:', formData);
+
+        const response = await fetch('http://127.0.0.1:8000/api/users/me/', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include',
+          body: JSON.stringify({ 
+            id,
+            nombre: nombre,
+            tel, 
+            email,
+            password})
+        });
+
+        if (!response.ok) {
+          console.log('response:', response);
+          throw new Error('Failed to update user info');
+        }
+        return await response.json();
+      }
     }
 ],
 }]);
