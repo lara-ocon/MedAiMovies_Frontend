@@ -18,7 +18,18 @@ const router = createBrowserRouter([{
   children: [
     {
       path: "",
-      element: <MovieListPage/>, // Antes era <ListPage/>
+      element: <MovieListPage/>,
+      loader: async () => {
+        const response = await fetch('http://127.0.0.1:8000/api/peliculas/');
+        if (!response.ok) {
+          throw new Error('No se pudo obtener la lista de películas');
+        }
+        else {
+          console.log('Erroorrrr');
+        }
+        return await response.json();
+      },
+      errorElement: <ErrorComponent/>
     },
     {
       path: "movie/:movieId",
