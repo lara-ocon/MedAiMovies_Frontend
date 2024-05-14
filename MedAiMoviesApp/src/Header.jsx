@@ -13,6 +13,13 @@ export default function Header() {
     const handleSearch = (event) => {
         event.preventDefault();
         navigate(`/search?q=${encodeURIComponent(searchTerm)}&t=${encodeURIComponent(searchType)}`);
+        setSearchTerm('');
+    };
+
+    const handleSelectChange = (e) => {
+        setSearchType(e.target.value);
+        // Aquí establece también el valor de searchTerm si deseas que cambie cuando cambie el selector
+        setSearchTerm('');
     };
 
     return (
@@ -22,7 +29,7 @@ export default function Header() {
             </Link>
 
             <form onSubmit={handleSearch}>
-                <select id="desplegable" value={searchType} onChange={(e) => setSearchType(e.target.value)}>
+                <select id="desplegable" value={searchType} onChange={handleSelectChange}>
                     <option value="titulo">Título</option>
                     <option value="director">Director</option>
                     <option value="genero">Género</option>
