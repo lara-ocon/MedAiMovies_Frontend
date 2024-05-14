@@ -45,7 +45,16 @@ const router = createBrowserRouter([{
     },
     {
       path: "search",
-      element: <SearchPage/>,  // Añade esta línea para la página de búsqueda
+      element: <SearchPage/>,
+      loader: async ({ request }) => {
+        const urlParams = new URLSearchParams(request.url.split('?')[1]);
+        const query = urlParams.get('q');
+        const type = urlParams.get('t') || 'title'; // Default to 'title' if type not provided
+        const response = await fetch(`http://127.0.0.1:8000/api/peliculas/search/?${encodeURIComponent(type)}=${encodeURIComponent(query)}`);
+        if (!response.ok) throw new Error('Error en la búsqueda de películas');
+        return await response.json();
+      },
+      errorElement: <ErrorComponent/>
     },
     {
       path: "login",
