@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from './AuthContext';
+import './templates/MovieDetailPage.css';
 
 function MovieReviews({ movieId }) {
   const [reviews, setReviews] = useState([]);
@@ -34,7 +35,7 @@ function MovieReviews({ movieId }) {
       {reviews.length > 0 ? (
         reviews.map(review => (
           <div key={review.id} style={{ borderBottom: '1px solid #ccc', paddingBottom: '10px', marginBottom: '10px' }}>
-            <h4>{review.usuario_email} - {review.fecha_creacion.slice(0, 10)}</h4>
+            <h4 id="review">{review.usuario_email} - {review.fecha_creacion.slice(0, 10)}</h4>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <StarRating rating={review.calificacion} />
               <p style={{ marginLeft: '10px' }}>{review.comentario}</p>
@@ -53,13 +54,14 @@ function StarRating({ rating }) {
   return (
     <div>
       {[...Array(5)].map((star, index) => (
-        <span key={index} className={index <= rating ? 'on' : 'off'}>
+        <span key={index} className={index < rating ? 'red' : 'black'}>
           <span className="star">&#9733;</span>
         </span>
       ))}
     </div>
   );
 }
+
 
 function ReviewForm({ movieId, addReview, userId }) {
   const [calificacion, setCalificacion] = useState(5);

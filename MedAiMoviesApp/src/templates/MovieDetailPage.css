@@ -30,3 +30,12 @@
 .movie-poster img {
     display: none; /* Si no quieres mostrar la imagen */
 }
+
+.red .star {
+    color: red; /* Colorea las estrellas de rojo hasta el valor de rating */
+  }
+  
+  .black .star {
+    color: black; /* Colorea las estrellas restantes de negro */
+  }
+  

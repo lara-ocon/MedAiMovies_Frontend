@@ -23,12 +23,13 @@ function MovieDetailPage() {
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: '20px' }}>
           <div style={{ flex: 1 }}>
             <h1 style={{ fontSize: '2.5rem', margin: '0 0 20px 0' }}>{movie.titulo}</h1>
-            <p>Director: {movie.director}</p>
-            <p>Fecha de estreno: {movie.fecha_estreno}</p>
-            <p>Género: {movie.genero}</p>
-            <p>País: {movie.pais}</p>
-            <p>Duración: {movie.duracion} minutos</p>
-            <p>Sinopsis: {movie.sinopsis}</p>
+            <p id="director">Director: {movie.director}</p>
+            <p id="fecha">Fecha de estreno: {movie.fecha_estreno}</p>
+            <p id="genero">Género: {movie.genero}</p>
+            <p id="pais">País: {movie.pais}</p>
+            <p id="duracion">Duración: {movie.duracion} minutos</p>
+            <p id="nota">Nota: {movie.nota}/5</p>
+            <p id="sinopsis">Sinopsis: {movie.sinopsis}</p>
           </div>
           <div style={{ flex: '0 1 300px', minHeight: '100%' }}>
             <img src={movie.poster} alt={movie.titulo} style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
