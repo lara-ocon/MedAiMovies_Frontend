@@ -5,7 +5,9 @@
 }
 
 * {
-    font-family: fantasy;
+    font-family: impact;
+    font-weight: bolder;
+    font-size: 20px;
     text-decoration: none;
 }
 
@@ -111,6 +113,11 @@ button[id="logout-button"] {
     color: rgb(0, 0, 0);
 }
 
+h1 {
+    font-size: 50px;
+}
+
+
 footer {
     background-color: #f45454;
     text-align: center;
@@ -123,3 +130,4 @@ footer p {
     margin: 0;
     color: white;
 }
+

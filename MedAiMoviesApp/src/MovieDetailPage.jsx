@@ -12,28 +12,43 @@ function MovieDetailPage() {
   }
 
   return (
-    <div id="movie-detail-container">
-      {movie ? (
-        <div id="movie-detail" >
-          <div id="movie-text">
-            <h1 style={{ fontSize: '2.5rem', margin: '0 0 20px 0' }}>{movie.titulo}</h1>
-            <p id="director">Director: {movie.director}</p>
-            <p id="fecha">Fecha de estreno: {movie.fecha_estreno}</p>
-            <p id="genero">Género: {movie.genero}</p>
-            <p id="pais">País: {movie.pais}</p>
-            <p id="duracion">Duración: {movie.duracion} minutos</p>
-            <p id="nota">Nota: {movie.nota}/5</p>
-            <p id="sinopsis">Sinopsis: {movie.sinopsis}</p>
-          </div>
-          <div id="movie-image-container">
-            <img id="movie-image" src={movie.poster} alt={movie.titulo}/>
+  <div id="movie-detail-container">
+    {movie ? (
+      <div id="movie-detail">
+        <div id="movie-text">
+          <h1>{movie.titulo}</h1>
+          <br></br>
+          <div id="movie-info">
+            <p>{movie.director} · {movie.fecha_estreno} · {movie.pais}</p>
+            <br></br>
+            <div id="sinopsis">
+              <p>{movie.sinopsis}</p>
+            </div>
+            <br></br>
+            <p>{movie.genero} · {movie.duracion} min</p>
+            <br></br>
+            <p>
+            {movie.nota}/5
+              <span className="stars">
+                {[...Array(5)].map((star, index) => (
+                  <span key={index} className={index < Math.round(movie.nota) ? 'red' : 'black'}>
+                    <span className="star">&#9733;</span>
+                  </span>
+                ))}
+              </span>
+            </p>
           </div>
         </div>
-      ) : (
-        <p>Cargando...</p>
-      )}
-      <MovieReviews movieId={movie.id} triggerReload={reloadMovieDetails} />
-    </div>
+        <div id="movie-image-container">
+          <img id="movie-image" src={movie.poster} alt={movie.titulo} />
+        </div>
+      </div>
+    ) : (
+      <p>Cargando...</p>
+    )}
+    <MovieReviews movieId={movie.id} triggerReload={reloadMovieDetails} />
+  </div>
+
   );
 }
 
