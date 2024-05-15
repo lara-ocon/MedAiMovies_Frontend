@@ -13,7 +13,7 @@ function MovieReviews({ movieId, triggerReload }) {
         'Authorization': `Token ${token}`,
         'Content-Type': 'application/json'
       };
-      const response = await fetch(`http://medaimovies-backend.onrender.com/api/reviews/?pelicula=${movieId}`, { headers });
+      const response = await fetch(`https://medaimovies-backend.onrender.com/api/reviews/?pelicula=${movieId}`, { headers });
       if (response.ok) {
         const data = await response.json();
         setReviews(data);
@@ -73,7 +73,7 @@ function ReviewForm({ movieId, addReview, userId, triggerReload }) {
 
     event.preventDefault();
     const token = localStorage.getItem('token');
-    const response = await fetch('http://medaimovies-backend.onrender.com/api/reviews/', {
+    const response = await fetch('https://medaimovies-backend.onrender.com/api/reviews/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

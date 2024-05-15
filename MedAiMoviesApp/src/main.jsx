@@ -20,7 +20,7 @@ const router = createBrowserRouter([{
       path: "",
       element: <MovieListPage />,
       loader: async () => {
-        const response = await fetch('http://medaimovies-backend.onrender.com/api/peliculas/');
+        const response = await fetch('https://medaimovies-backend.onrender.com/api/peliculas/');
         if (!response.ok) {
           throw new Error('No se pudo obtener la lista de películas');
         }
@@ -35,7 +35,7 @@ const router = createBrowserRouter([{
       path: "movie/:movieId",
       element: <MovieDetailPage />,
       loader: async ({ params }) => {
-        const response = await fetch(`http://medaimovies-backend.onrender.com/api/peliculas/${params.movieId}/`);
+        const response = await fetch(`https://medaimovies-backend.onrender.com/api/peliculas/${params.movieId}/`);
         if (!response.ok) {
           throw new Error('No se pudo obtener la película');
         }
@@ -50,7 +50,7 @@ const router = createBrowserRouter([{
         const urlParams = new URLSearchParams(request.url.split('?')[1]);
         const query = urlParams.get('q');
         const type = urlParams.get('t') || 'title'; // Default to 'title' if type not provided
-        const response = await fetch(`http://medaimovies-backend.onrender.com/api/peliculas/search/?${encodeURIComponent(type)}=${encodeURIComponent(query)}`);
+        const response = await fetch(`https://medaimovies-backend.onrender.com/api/peliculas/search/?${encodeURIComponent(type)}=${encodeURIComponent(query)}`);
         if (!response.ok) throw new Error('Error en la búsqueda de películas');
         return await response.json();
       },
@@ -63,7 +63,7 @@ const router = createBrowserRouter([{
         const formData = await request.formData();
         const email = formData.get('email');
         const password = formData.get('password');
-        const response = await fetch('http://medaimovies-backend.onrender.com/api/users/login/', {
+        const response = await fetch('https://medaimovies-backend.onrender.com/api/users/login/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
@@ -92,7 +92,7 @@ const router = createBrowserRouter([{
           return { error: "Las contraseñas no coinciden." };
         }
 
-        const response = await fetch('http://medaimovies-backend.onrender.com/api/users/', {
+        const response = await fetch('https://medaimovies-backend.onrender.com/api/users/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ nombre, tel, email, password })
@@ -113,7 +113,7 @@ const router = createBrowserRouter([{
       path: "userInfo",
       element: <UserInfo />,
       loader: async () => {
-        const response = await fetch('http://medaimovies-backend.onrender.com/api/users/me/', {
+        const response = await fetch('https://medaimovies-backend.onrender.com/api/users/me/', {
           method: 'GET',
           credentials: 'include',
         });
@@ -139,7 +139,7 @@ const router = createBrowserRouter([{
 
         console.log('formData:', formData);
 
-        const response = await fetch('http://medaimovies-backend.onrender.com/api/users/me/', {
+        const response = await fetch('https://medaimovies-backend.onrender.com/api/users/me/', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'

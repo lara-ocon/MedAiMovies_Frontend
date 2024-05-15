@@ -77,7 +77,7 @@ download and install them from [Node.js official website](https://nodejs.org/).
 
 ## Interaction with the Backend
 
-The frontend communicates with the MedAiMovies Backend to fetch and send data. Make sure the backend server is running on `http://medaimovies-backend.onrender.com` or update the base URL in the frontend's configuration if your backend is running on a different address.
+The frontend communicates with the MedAiMovies Backend to fetch and send data. Make sure the backend server is running on `https://medaimovies-backend.onrender.com` or update the base URL in the frontend's configuration if your backend is running on a different address.
 
 hosted differently. This connection is crucial for functionalities like:
 
