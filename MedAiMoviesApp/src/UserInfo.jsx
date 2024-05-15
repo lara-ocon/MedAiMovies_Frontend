@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useLoaderData, useActionData, Form, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext.jsx';
 
@@ -9,14 +9,15 @@ export default function UserInfo() {
     const { deleteAccount } = useAuth();
 
     // Actualizar el estado local con los datos del loader
-    const [username, setUsername] = React.useState(userInfo.nombre);
-    const [tel, setTel] = React.useState(userInfo.tel);
-    const [email, setEmail] = React.useState(userInfo.email);
-    const [password, setPassword] = React.useState(userInfo.password);
-    const [id, setId] = React.useState(userInfo.id);
+    const [username, setUsername] = useState(userInfo.nombre);
+    const [tel, setTel] = useState(userInfo.tel);
+    const [email, setEmail] = useState(userInfo.email);
+    const [password, setPassword] = useState(userInfo.password);
+    const [id, setId] = useState(userInfo.id);
+    const [message, setMessage] = useState(''); // Mensaje de error
 
     // Si hay respuesta de la acción, maneja la actualización
-    React.useEffect(() => {
+    useEffect(() => {
         if (actionData) {
             if (actionData.error) {
                 alert(actionData.error);
@@ -28,6 +29,15 @@ export default function UserInfo() {
         event.preventDefault(); // Prevent the form from submitting normally
         await deleteAccount();
         navigate('/');
+    }
+
+    const onSubmit = () => {
+        if (tel.length < 7 || tel.length > 9) {
+            setMessage("⚠️ El teléfono debe tener entre 7 y 9 dígitos");
+        }
+        else {
+            setMessage("Informacion actualizada correctamente");
+        }
     }
 
     return (
@@ -44,14 +54,14 @@ export default function UserInfo() {
                     </div>
                     <div className="form-control">
                         <label htmlFor="tel">Teléfono</label>
-                        <input type="text" id="tel" name="tel" value={tel} onChange={e => setTel(e.target.value)} placeholder="Teléfono" />
+                        <input type="text" id="tel" name="tel" value={tel} minLength={7} maxLength={9} onChange={e => setTel(e.target.value)} placeholder="Teléfono" />
                     </div>
+                    {message && <p className="message">{message}</p>}
                     <div className="login-button">
-                        <button type="submit">Actualizar</button>
+                        <button onClick={onSubmit} type="submit">Actualizar</button>
                     </div>
                 </Form>
 
-                {/* Delete user button */}
                 <form onSubmit={handleDelete}>
                     <div className="login-button">
                         <button type="submit">Eliminar cuenta</button>
