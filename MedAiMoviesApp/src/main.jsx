@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from './App.jsx'
 import MovieListPage from './MovieListPage.jsx'
 import MovieDetailPage from './MovieDetailPage.jsx';
-import SearchPage from './SearchPage.jsx'; // Para la búsqueda de pelis
+import SearchPage from './SearchPage.jsx';
 import ErrorComponent from './ErrorComponent.jsx';
 import Login from './Login.jsx'
 import Register from './Register.jsx'
@@ -23,9 +23,6 @@ const router = createBrowserRouter([{
         const response = await fetch('https://medaimovies-backend.onrender.com/api/peliculas/');
         if (!response.ok) {
           throw new Error('No se pudo obtener la lista de películas');
-        }
-        else {
-          console.log('Erroorrrr');
         }
         return await response.json();
       },
@@ -49,7 +46,7 @@ const router = createBrowserRouter([{
       loader: async ({ request }) => {
         const urlParams = new URLSearchParams(request.url.split('?')[1]);
         const query = urlParams.get('q');
-        const type = urlParams.get('t') || 'title'; // Default to 'title' if type not provided
+        const type = urlParams.get('t') || 'title';
         const response = await fetch(`https://medaimovies-backend.onrender.com/api/peliculas/search/?${encodeURIComponent(type)}=${encodeURIComponent(query)}`);
         if (!response.ok) throw new Error('Error en la búsqueda de películas');
         return await response.json();
@@ -131,13 +128,6 @@ const router = createBrowserRouter([{
         const email = formData.get('email');
         const password = undefined;
         const id = formData.get('id');
-        console.log('id:', id);
-        console.log('nombre:', nombre);
-        console.log('tel:', tel);
-        console.log('email:', email);
-        console.log('password', password);
-
-        console.log('formData:', formData);
 
         const response = await fetch('https://medaimovies-backend.onrender.com/api/users/me/', {
           method: 'PUT',
@@ -155,7 +145,6 @@ const router = createBrowserRouter([{
         });
 
         if (!response.ok) {
-          console.log('response:', response);
           throw new Error('Failed to update user info');
         }
         return await response.json();

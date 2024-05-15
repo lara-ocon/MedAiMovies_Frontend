@@ -8,7 +8,7 @@ export default function UserInfo() {
     const actionData = useActionData(); // Obtiene los datos de la acción del router
     const { deleteAccount } = useAuth();
 
-    // Actualizar el estado local con los datos del loader
+    // Actualiza el estado local con los datos del loader
     const [username, setUsername] = useState(userInfo.nombre);
     const [tel, setTel] = useState(userInfo.tel);
     const [email, setEmail] = useState(userInfo.email);

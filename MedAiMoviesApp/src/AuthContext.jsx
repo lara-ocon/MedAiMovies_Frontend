@@ -3,25 +3,17 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 const AuthContext = createContext(null);
 
 export function useAuth() {
-    console.log(AuthContext);
-    console.log(useContext(AuthContext));
     return useContext(AuthContext);
 }
 
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
-    const [userId, setUserId] = useState(0);  // Agregar userId al estado
-    /*
-    const login = (name) => {
-        setIsLoggedIn(true);
-        setUsername(name);
-    };
-    */
+    const [userId, setUserId] = useState(0);  // Agrega userId al estado
     const login = (userDetails) => {
         setIsLoggedIn(true);
         setUsername(userDetails.username);
-        setUserId(userDetails.userId);  // Guardar userId proporcionado por el backend
+        setUserId(userDetails.userId);  // Guarda userId proporcionado por el backend
     };
 
     const logout = async () => {
@@ -30,7 +22,6 @@ export const AuthProvider = ({ children }) => {
                 method: 'DELETE',
                 credentials: 'include', // Para asegurar que se envíen las cookies
             });
-            console.log('logour response:', response);
             if (response.ok) {
                 setIsLoggedIn(false);
                 setUsername('');
@@ -45,7 +36,6 @@ export const AuthProvider = ({ children }) => {
     };
 
     const deleteAccount = async () => {
-        console.log('deleteAccount');
         try {
             const response = await fetch('https://medaimovies-backend.onrender.com/api/users/me/', {
                 method: 'DELETE',
@@ -66,7 +56,6 @@ export const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        console.log('useEffectttt');
         const checkLoggedIn = async () => {
             const token = localStorage.getItem('token');
             if (token) {

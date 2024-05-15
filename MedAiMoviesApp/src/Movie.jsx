@@ -8,8 +8,6 @@ function Movie({ movie }) {
             <img src={movie.poster} alt={movie.titulo} />
             <h3>{movie.titulo}</h3>
             <h4>{movie.fecha_estreno.split('-')[0]}</h4>
-            {/* Ponemos parte de la sinopsis para que no ocupe tanto espacio en la lista de películas */}
-            {/*s<p>{movie.sinopsis.slice(0, 110)}...</p>*/}
         </Link>
     );
 }

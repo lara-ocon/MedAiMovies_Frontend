@@ -27,7 +27,6 @@ function MovieReviews({ movieId, triggerReload }) {
   const addReview = (review) => {
     setReviews((prevReviews) => [...prevReviews, review]);
   };
-  console.log('Reviews:', reviews);
 
   return (
     <div>
@@ -68,8 +67,6 @@ function ReviewForm({ movieId, addReview, userId, triggerReload }) {
   const [comentario, setComentario] = useState('');
 
   const handleSubmit = async (event) => {
-    // console.log('movieId', movieId);
-    // console.log('userId', userId);
 
     event.preventDefault();
     const token = localStorage.getItem('token');
@@ -91,7 +88,6 @@ function ReviewForm({ movieId, addReview, userId, triggerReload }) {
       const newReview = await response.json();
       addReview(newReview);
       setComentario('');
-      console.log('newReview:', newReview);
       triggerReload(); // Para cambiar el estado y lanzar el useEffect de MovieDetailPage
     } else {
       console.error('Failed to submit review', response.statusText);

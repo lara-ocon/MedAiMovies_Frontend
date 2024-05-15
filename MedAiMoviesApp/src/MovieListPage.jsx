@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Movie from './Movie.jsx'; // Importar el componente Movie
+import Movie from './Movie.jsx';
 import { useLoaderData } from 'react-router-dom';
 
 function MovieListPage() {

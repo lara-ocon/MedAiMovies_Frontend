@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
-import Movie from './Movie.jsx'; // Importa el componente reutilizable
+import Movie from './Movie.jsx';
 
 export default function SearchPage() {
     

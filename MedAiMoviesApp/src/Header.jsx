@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext.jsx';
-import Logout from './Logout.jsx'; // Importa el componente Logout
-import './templates/header.css'; // Importa los estilos definidos anteriormente
+import Logout from './Logout.jsx'; 
+import './templates/header.css'; 
 
 export default function Header() {
     const { isLoggedIn } = useAuth();
@@ -18,11 +18,10 @@ export default function Header() {
 
     const handleSelectChange = (e) => {
         setSearchType(e.target.value);
-        // Aquí establece también el valor de searchTerm si deseas que cambie cuando cambie el selector
         setSearchTerm('');
     };
 
-    // Controlar que la barra de búsqueda sea de tipo texto o número
+    // Controla que la barra de búsqueda sea de tipo texto o número
     const inputType = searchType === 'nota' ? 'number' : 'text';
     const placeholder = searchType === 'nota' ? 'Introduzca nota (1-5)' : '🔎 Buscar películas...';
     const min = searchType === 'nota' ? 1 : undefined;

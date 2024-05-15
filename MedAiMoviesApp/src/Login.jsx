@@ -10,12 +10,11 @@ export default function Login() {
     // Si el login es exitoso, pasamos la respuesta a la función login del contexto
     useEffect(() => {
         if (actionData && actionData.email && actionData.userId) {
-            console.log('Login exitoso');
             login({ username: actionData.email, userId: actionData.userId });
             localStorage.setItem('token', actionData.token);
             navigate('/'); // Navega a la página principal
         } else {
-            console.log('Login fallido');
+            console.error('Login fallido');
         }
     },
         [actionData, login, navigate]);
