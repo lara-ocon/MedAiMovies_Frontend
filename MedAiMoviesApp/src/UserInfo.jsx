@@ -32,7 +32,12 @@ export default function UserInfo() {
     }
 
     const onSubmit = () => {
-        setMessage("Informacion actualizada correctamente");
+        if (tel.length < 7 || tel.length > 9) {
+            setMessage("⚠️ El teléfono debe tener entre 7 y 9 dígitos");
+        }
+        else {
+            setMessage("Informacion actualizada correctamente");
+        }
     }
 
     return (
@@ -49,7 +54,7 @@ export default function UserInfo() {
                     </div>
                     <div className="form-control">
                         <label htmlFor="tel">Teléfono</label>
-                        <input type="text" id="tel" name="tel" value={tel} onChange={e => setTel(e.target.value)} placeholder="Teléfono" />
+                        <input type="text" id="tel" name="tel" value={tel} minLength={7} maxLength={9} onChange={e => setTel(e.target.value)} placeholder="Teléfono" />
                     </div>
                     {message && <p className="message">{message}</p>}
                     <div className="login-button">
