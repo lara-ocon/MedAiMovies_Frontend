@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from './AuthContext';
 import './templates/MovieDetailPage.css';
 
-function MovieReviews({ movieId , triggerReload }) {
+function MovieReviews({ movieId, triggerReload }) {
   const [reviews, setReviews] = useState([]);
-  const { isLoggedIn, userId } = useAuth();  
+  const { isLoggedIn, userId } = useAuth();
 
   useEffect(() => {
     async function fetchReviews() {
@@ -13,7 +13,7 @@ function MovieReviews({ movieId , triggerReload }) {
         'Authorization': `Token ${token}`,
         'Content-Type': 'application/json'
       };
-      const response = await fetch(`http://127.0.0.1:8000/api/reviews/?pelicula=${movieId}`, { headers });
+      const response = await fetch(`https://medaimovies-backend.onrender.com/api/reviews/?pelicula=${movieId}`, { headers });
       if (response.ok) {
         const data = await response.json();
         setReviews(data);
@@ -63,17 +63,17 @@ function StarRating({ rating }) {
 }
 
 
-function ReviewForm({ movieId, addReview, userId , triggerReload }) {
+function ReviewForm({ movieId, addReview, userId, triggerReload }) {
   const [calificacion, setCalificacion] = useState(5);
   const [comentario, setComentario] = useState('');
 
   const handleSubmit = async (event) => {
     // console.log('movieId', movieId);
     // console.log('userId', userId);
-    
+
     event.preventDefault();
     const token = localStorage.getItem('token');
-    const response = await fetch('http://127.0.0.1:8000/api/reviews/', {
+    const response = await fetch('https://medaimovies-backend.onrender.com/api/reviews/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ function ReviewForm({ movieId, addReview, userId , triggerReload }) {
     if (response.ok) {
       const newReview = await response.json();
       addReview(newReview);
-      setComentario(''); 
+      setComentario('');
       console.log('newReview:', newReview);
       triggerReload(); // Para cambiar el estado y lanzar el useEffect de MovieDetailPage
     } else {
@@ -109,7 +109,7 @@ function ReviewForm({ movieId, addReview, userId , triggerReload }) {
       <select id="grade" value={calificacion} onChange={e => setCalificacion(Number(e.target.value))}>
         {[1, 2, 3, 4, 5].map(n => (
           <option key={n} value={n}>{n}</option>
-          ))}
+        ))}
       </select>
       <br />
       <div id="review-button">

@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useEffect} from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const AuthContext = createContext(null);
 
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/users/logout/', {
+            const response = await fetch('https://medaimovies-backend.onrender.com/api/users/logout/', {
                 method: 'DELETE',
                 credentials: 'include', // Para asegurar que se envíen las cookies
             });
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
     const deleteAccount = async () => {
         console.log('deleteAccount');
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/users/me/', {
+            const response = await fetch('https://medaimovies-backend.onrender.com/api/users/me/', {
                 method: 'DELETE',
                 credentials: 'include',
             });
@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
             const token = localStorage.getItem('token');
             if (token) {
                 try {
-                    const response = await fetch('http://127.0.0.1:8000/api/users/me/', {
+                    const response = await fetch('https://medaimovies-backend.onrender.com/api/users/me/', {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json'
@@ -92,10 +92,10 @@ export const AuthProvider = ({ children }) => {
 
         checkLoggedIn();
     }
-    , []);
+        , []);
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, username, userId, login, logout, deleteAccount}}>
+        <AuthContext.Provider value={{ isLoggedIn, username, userId, login, logout, deleteAccount }}>
             {children}
         </AuthContext.Provider>
     );
