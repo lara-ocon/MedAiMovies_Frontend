@@ -77,4 +77,21 @@ download and install them from [Node.js official website](https://nodejs.org/).
 
 ## Interaction with the Backend
 
-The frontend communicates with the MedAiMovies Backend to fetch and send data. Make sure the backend server is running on `http://127.0.0.1:8000` or update the base URL in the frontend's configuration if your backend is
+The frontend communicates with the MedAiMovies Backend to fetch and send data. Make sure the backend server is running on `http://127.0.0.1:8000` or update the base URL in the frontend's configuration if your backend is running on a different address.
+
+hosted differently. This connection is crucial for functionalities like:
+
+- **Fetching movie lists and details**: The frontend requests data from the backend and displays it to the users.
+- **Handling user authentication**: Login and registration requests are sent to the backend, which then handles user authentication and session management.
+- **Posting reviews**: Users can write and submit reviews for movies, which are then stored in the backend database.
+- **User profile updates**: Any changes made to user profiles through the frontend are updated in the backend.
+
+Ensure that the backend API is accessible and correctly configured to respond to requests from the frontend for seamless operation.
+
+## Additional Notes
+
+- The frontend uses React Router for navigation and routing to different components.
+- State management is handled using React Context for global state like user authentication.
+- The application's responsiveness and interactivity are enhanced with the use of modern JavaScript features and React capabilities.
+
+By following these setup instructions and understanding the interaction between the frontend and backend, you should be able to run and develop the MedAiMovies application effectively. For more detailed information about specific functionalities or troubleshooting, refer to the comments and documentation within the codebase or the issues section of the repository.
