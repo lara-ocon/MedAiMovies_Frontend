@@ -15,7 +15,7 @@ export default function Register() {
 
     return (
         <div className="container">
-            <h1>Register</h1>
+            <h1>Registro</h1>
             <div className="info">
                 <Form method="post">
                     <div className="form-control">
