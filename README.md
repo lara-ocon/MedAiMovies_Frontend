@@ -5,6 +5,7 @@ This README provides the necessary instructions to get the MedAiMovies frontend 
 ---
 
 ## Project Overview
+[Wath video in Google Drive](https://drive.google.com/file/d/15gQoJTe20PseySbKAEZs_FACHSNanDel/view?usp=sharing)
 
 MedAiMovies is a React application designed to provide a web interface for exploring movie details, reviews, and managing user accounts. The frontend interacts with a Django RESTful API backend to retrieve and store data, making it a full-fledged web application. The frontend is responsible for presenting data to the users and sending user input back to the backend.
 
